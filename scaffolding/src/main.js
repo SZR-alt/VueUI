@@ -7,6 +7,7 @@ import qs from 'qs'
 import moment from 'moment';
 
 Vue.prototype.moment = moment;
+Vue.prototype.qs = qs;
 
 //导入Mint UI
 import MintUI from 'mint-ui';

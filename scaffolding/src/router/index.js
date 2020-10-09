@@ -8,9 +8,11 @@ import Field from '../components/MintUI/Field.vue';
 import Navbar from '../components/MintUI/Navbar.vue';
 import Infinite from '../components/MintUI/Infinite.vue';
 import Swipe from '../components/MintUI/Swipe.vue';
+import Qs from '../components/MintUI/Qs.vue';
 
 // 项目实践页面
 import Register from '../views/Register.vue';
+import Login from '../views/Login.vue';
 import Me from '../views/Me.vue';
 import Article from '../views/Article.vue';
 
@@ -20,6 +22,14 @@ const routes = [
   {
     path:'/header',
     component:Header
+  },
+  {
+    path:'/qs',
+    component:Qs
+  },
+  {
+    path:'/swipe',
+    component:Swipe
   },
   {
     path:'/infinite',
@@ -42,6 +52,10 @@ const routes = [
     component: Register
   },
   {
+    path: '/login',    
+    component: Login
+  },
+  {
     path: '/article/:id',    
     component: Article
   },  
@@ -53,10 +67,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/swipe',
-    component: Swipe
   },
   {
     path: '/about',

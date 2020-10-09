@@ -2,6 +2,7 @@ const express = require('express');
 const server = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const md5 = require('md5');
 
 const mysql = require('mysql');
 const pool = mysql.createPool({
@@ -97,21 +98,53 @@ server.get('/article',(req,res)=>{
   });
 });
 
-// 用户注册的接口
+//用户注册的接口
 server.post('/register',(req,res)=>{
-  let username=req.body.username;
-  let password=req.body.password;
-  let sql='SELECT id FROM xzqa_author WHERE username=?';
+  //接收用户以POST方式提交的数据
+  let username = req.body.username;
+  let password = req.body.password;  
+  //在xzqa_author数据表中username字段要保证记录的唯一性
+  //所以先需要检测用户名是否已经存在，
+  let sql = 'SELECT id FROM xzqa_author WHERE username=?';
+  
   pool.query(sql,[username],(error,results)=>{
     if(error) throw error;
-    if(results.length==0){
-      // 将相关的信息写入到xzqa_author
-    }else{
-      // 产生合理的错误信息到客户端
+    // 如果用户名不存在，则返回空数组 -- []
+    // 如果用户名已存在，则返回只包含一个对象的数组,形如： [  { id: 11 } ]
+    // 所以，通过数组的长度即可证明输入的用户名是否已经存在
+    if(results.length == 0){
+      //将相关的信息写入到xzqa_author数据表
+      sql = 'INSERT xzqa_author(username,password) VALUES(?,MD5(?))';
+      pool.query(sql,[username,password],(error,results)=>{
+        if(error) throw error;
+        res.send({message: '注册成功',code:1});
+      });
+    } else {
+      //产生合理的错误信息到客户端
+      res.send({message:'注册失败',code:0});
     }
-  })
-  console.log(username,password);
-})
+  });  
+});
+
+//用户登录的接口
+server.post('/login',(req,res)=>{
+  //获取用户输入的用户名和密码信息
+  let username = req.body.username;
+  let password = md5(req.body.password);  
+  //现在要以输入的用户名和密码为条件进行查找
+  let sql = 'SELECT id,username,nickname,avatar FROM xzqa_author WHERE username=? AND password=?';
+  pool.query(sql,[username,password],(error,results)=>{
+    if(error) throw error;
+    //如果找到，则代表用户登录成功
+    if(results.length == 1){
+      res.send({message:'登录成功',code:1,info:results[0]})
+    } else { //否则代表用户登录失败
+      res.send({message:'登录失败',code:0})
+    }
+  });
+  
+  
+});
 
 server.listen(3000,()=>{
   console.log('server is running...');

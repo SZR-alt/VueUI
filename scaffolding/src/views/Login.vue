@@ -5,8 +5,8 @@
         <router-link to="/" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
-        <router-link to="/login" slot="right" class="shortcut">
-          登录
+        <router-link to="/register" slot="right" class="shortcut">
+          注册
         </router-link>
     </mt-header>
     <!-- 顶部导航结束 -->
@@ -32,17 +32,8 @@
           @blur.native.capture="checkPassword">
         </mt-field>   
 
-        <mt-field 
-          type="password" 
-          label="确认密码"
-          placeholder="请再次输入密码"
-          :attr="{maxlength:20,autocomplete:'off'}"
-          v-model="conpassword"
-          :state="conpasswordState"
-          @blur.native.capture="checkConpassword">
-        </mt-field>   
 
-        <mt-button type="primary" size="large" @click="handle">免费注册</mt-button>    
+        <mt-button type="primary" size="large" @click="handle">快速登录</mt-button>    
     </div>
     <!-- 表单区域结束 -->
   </div>
@@ -65,9 +56,7 @@ export default {
       // 用户名的状态
       usernameState:'',
       // 密码的状态
-      passwordState:'',
-      // 确认密码的状态
-      conpasswordState:''
+      passwordState:''
     }
   },
   methods:{
@@ -101,31 +90,23 @@ export default {
         });
         return false;
       }
-    },
-    //校验确认密码
-    checkConpassword(){
-      if(this.password != this.conpassword){
-        this.$toast({
-          message:"两次密码不一致",
-          position:"top",
-          duration:"2000"
-        });
-        return false;
-      } else {
-        return true;
-      }
-    },
+    },   
     handle(){
-      if(this.checkUsername() && this.checkPassword() && this.checkConpassword()){
+      if(this.checkUsername() && this.checkPassword()){
         //该将获取到的信息提交到WEB服务器
-        this.axios.post('/register','username=' + this.username + '&password=' + this.password).then(res=>{
-            //用户注册成功
+        let obj = {
+          username:this.username,
+          password:this.password
+        }
+        this.axios.post('/login',this.qs.stringify(obj)).then(res=>{
+            //用户登录成功
             if(res.data.code == 1){
-                this.$router.push('/');
-            } else{
-                this.$messagebox('注册提示','用户名已经占用');
+              //后续可能需要调整
+              this.$router.push('/');
+            } else {
+              this.$messagebox("登录提示","用户名或密码错误");
             }
-        });
+        })
       }
     }
   }
