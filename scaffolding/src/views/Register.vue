@@ -118,7 +118,9 @@ export default {
     handle(){
       if(this.checkUsername() && this.checkPassword() && this.checkConpassword()){
         //该将获取到的信息提交到WEB服务器
-        console.log('该将获取到的信息提交到WEB服务器');
+        this.axios.post('/register','username=' + this.username + '&password=' + this.password).then(res=>{
+
+        });
       }
     }
   }

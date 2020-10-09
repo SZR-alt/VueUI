@@ -1,6 +1,7 @@
 const express = require('express');
 const server = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const mysql = require('mysql');
 const pool = mysql.createPool({
@@ -23,6 +24,9 @@ server.use(cors({
   origin:['http://127.0.0.1:8080','http://localhost:8080']
 }));
 
+server.use(bodyParser.urlencoded({
+  extended:false
+}));
 
 
 // 获取所有文章分类的接口
@@ -92,6 +96,22 @@ server.get('/article',(req,res)=>{
     res.send({message:'查询成功',code:1,result:results[0]});
   });
 });
+
+// 用户注册的接口
+server.post('/register',(req,res)=>{
+  let username=req.body.username;
+  let password=req.body.password;
+  let sql='SELECT id FROM xzqa_author WHERE username=?';
+  pool.query(sql,[username],(error,results)=>{
+    if(error) throw error;
+    if(results.length==0){
+      // 将相关的信息写入到xzqa_author
+    }else{
+      // 产生合理的错误信息到客户端
+    }
+  })
+  console.log(username,password);
+})
 
 server.listen(3000,()=>{
   console.log('server is running...');
