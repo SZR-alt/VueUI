@@ -7,6 +7,7 @@ import Button from '../components/MintUI/Button.vue';
 import Field from '../components/MintUI/Field.vue';
 import Navbar from '../components/MintUI/Navbar.vue';
 import Infinite from '../components/MintUI/Infinite.vue';
+import Swipe from '../components/MintUI/Swipe.vue';
 
 // 项目实践页面
 import Register from '../views/Register.vue';
@@ -52,6 +53,10 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/swipe',
+    component: Swipe
   },
   {
     path: '/about',
