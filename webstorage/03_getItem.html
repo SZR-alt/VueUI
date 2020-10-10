@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log('sessionStorage的username值是:' + sessionStorage.getItem('username')); //null
+        console.log('sessionStorage的age值是:' + sessionStorage.getItem('age')); //null
+        console.log('sessionStorage的sex值是:' + sessionStorage.getItem('sex')); //null
+        if (sessionStorage.getItem('sex') == 'true') {
+            console.log('男');
+        } else {
+            console.log('女'); //女   不准确
+        }
+        console.log(typeof(sessionStorage.getItem('usernamee'))); //object
+        console.log(typeof(sessionStorage.getItem('age'))); //object
+        console.log(typeof(sessionStorage.getItem('sex'))); //object
+
+        console.log('localStorageStorage的username值是:' + localStorage.getItem('username')); //Rose
+        console.log('localStorageStorage的age值是:' + localStorage.getItem('age')); //19
+        console.log('localStorageStorage的sex值是:' + localStorage.getItem('sex')); //false
+        if (localStorage.getItem('sex') == 'true') {
+            console.log('男');
+        } else {
+            console.log('女'); //女
+        }
+        console.log(typeof(localStorage.getItem('usernamee'))); //object
+        console.log(typeof(localStorage.getItem('age'))); //string
+        console.log(typeof(localStorage.getItem('sex'))); //string
+    </script>
+</body>
+
+</html>
