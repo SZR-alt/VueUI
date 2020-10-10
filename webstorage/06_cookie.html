@@ -19,6 +19,11 @@
         document.cookie = 'password=12345;expires=' + expires;
         document.cookie = 'age=23;expires=' + expires;
         document.cookie = 'salary=5000;expires=' + expires;
+        //立即失效的cookie,当前的小时数向前推算10个小时
+        now.setMonth(now.getMonth() - 5);
+        now.setHours(now.getHours() - 10);
+        expires = now.toUTCString();
+        document.cookie = "userId=5;expires=" + expires;
         // 获取COOKIE
         console.log('获取到的cookie信息为:' + document.cookie);
     </script>

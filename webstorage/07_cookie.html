@@ -9,7 +9,30 @@
 
 <body>
     <script>
-        console.log(document.cookie);
+        function getCookieItem(key) {
+            //获取当前的cookie字符串,形如 username=123; password=456; age=19
+            let cookie = document.cookie;
+            // console.log(document.cookie);
+            //第一次使用分号进行拆分，结果为数组，
+            //形如 ['username=123',' password=456',' age=19']
+            let array = cookie.split(/;/g);
+            for (let n = 0; n < array.length; n++) {
+                //依次拆分每一个数组字符串成员,其中下标为0的代表key,下标为1的代表value
+                let temp = array[n].split(/=/g);
+                //之所以要使用trim()方法是因为存在空格,注意第11行中的空格
+                if (temp[0].trim() == key) {
+                    //如果找到，则直接返回数组中下标为1的value,此时即可终止函数的执行
+                    return temp[1];
+                }
+            }
+            // console.log(array);
+            //如果没有找到的话，则返回undefined，当然也可以返回其他的信息
+            return undefined;
+        }
+        // getCookieItem();
+        console.log(getCookieItem('username'));
+        console.log(getCookieItem('password'));
+        console.log(getCookieItem('productId'));
     </script>
 </body>
 
