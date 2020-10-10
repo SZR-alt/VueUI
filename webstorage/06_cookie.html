@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let now = new Date();
+        // 设置月份为当前月份后的五个月
+        now.setMonth(now.getMonth() + 5);
+        // console.log(now.toUTCString());
+        let expires = now.toUTCString();
+        // 设置COOKIE
+        document.cookie = 'username=Rose;expires=' + expires;
+        document.cookie = 'password=12345;expires=' + expires;
+        document.cookie = 'age=23;expires=' + expires;
+        document.cookie = 'salary=5000;expires=' + expires;
+        // 获取COOKIE
+        console.log('获取到的cookie信息为:' + document.cookie);
+    </script>
+</body>
+
+</html>
