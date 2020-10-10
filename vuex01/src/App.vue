@@ -2,7 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/access1">访问Vuex数据页面1</router-link> |
+      <router-link to="/access2">访问Vuex数据页面2</router-link> |
+      <router-link to="/changeage">修改年龄</router-link> |
+      <router-link to="/addproduct">添加商品</router-link> |
     </div>
     <router-view/>
   </div>
