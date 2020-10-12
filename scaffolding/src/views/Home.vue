@@ -3,9 +3,13 @@
    <!-- 顶部导航开始 -->
    <div>
      <mt-header title="学前端,到学问">
-       <div slot="right" class="shortcut">
+       <div slot="right" class="shortcut" v-if="this.$store.state.isLogined == 0">
          <router-link to="/register">注册</router-link>
          <router-link to="/login">登录</router-link>
+       </div>
+       <div slot="right" class="shortcut" v-else>
+         {{this.$store.state.username}},
+         <mt-button type="primary" @click="logout">注销</mt-button>
        </div>
      </mt-header>
    </div>
@@ -158,6 +162,10 @@ export default {
     }
   },
   methods:{
+    // 用户注销
+    logout(){
+      this.$store.commit('logout');
+    },
     /**
      * 加载数据的自定义函数,会被mounted、active及loadMore分别进行调用    
      * 
@@ -169,10 +177,10 @@ export default {
     loadData(cid,page){
 
       //显示加载提示框
-      // this.$indicator.open({
-      //   text:'加载中...',
-      //   spinnerType:'double-bounce'
-      // });
+      this.$indicator.open({
+        text:'加载中...',
+        spinnerType:'double-bounce'
+      });
 
       //此时的真正作用是：现在已经触发了滚动方法,既使现在再次进行
       //滚动范围也不再触发滚动方法了    
@@ -192,7 +200,7 @@ export default {
         //如果现在再次进行滚动范围，则仍然要触发滚动方法
         this.busy = false;
         //关闭加载提示框
-        // this.$indicator.close();
+        this.$indicator.close();
       });
     },
     //滚动到指定距离范围内时加载更多的服务器数据

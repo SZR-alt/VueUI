@@ -22,7 +22,7 @@ const pool = mysql.createPool({
 
 
 server.use(cors({
-  origin:['http://127.0.0.1:8080','http://localhost:8080']
+  origin:['http://127.0.0.1:8080','http://localhost:8080','http://127.0.0.1:8081','http://localhost:8081']
 }));
 
 server.use(bodyParser.urlencoded({
@@ -144,6 +144,22 @@ server.post('/login',(req,res)=>{
   });
   
   
+});
+
+//Vuex的测试接口
+server.get('/vuex',(req,res)=>{
+  //假设数据是从数据库获取的
+  let results = [
+    {
+      productName:'华为Mate Xs折叠屏5G手机 matexs 星际',
+      salePrice:21588.00
+    },
+    {
+      productName:'华为Mate Xs折叠屏5G手机 matexs 星际',
+      salePrice:18699.00
+    }
+  ];
+  res.send({message:'查询成功',code:1,results:results});
 });
 
 server.listen(3000,()=>{

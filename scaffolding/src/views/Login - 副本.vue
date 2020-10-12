@@ -98,21 +98,18 @@ export default {
           username:this.username,
           password:this.password
         }
-        //分发Actions
-        this.$store.dispatch('login',obj)
-        // this.$store.dispatch(???,????);
-        // this.axios.post('/login',this.qs.stringify(obj)).then(res=>{
-        //     //用户登录成功
-        //     if(res.data.code == 1){
-        //       //提交Mutations
-        //       this.$store.commit('logined');
-        //       //为什么还要往webstorage中存储呢?因为用户刷新后数据依然要保持
-        //       localStorage.setItem('isLogined','1');
-        //       this.$router.push('/');
-        //     } else {
-        //       this.$messagebox("登录提示","用户名或密码错误");
-        //     }
-        // })
+        this.axios.post('/login',this.qs.stringify(obj)).then(res=>{
+            //用户登录成功
+            if(res.data.code == 1){
+              //提交Mutations
+              this.$store.commit('logined');
+              //为什么还要往webstorage中存储呢?因为用户刷新后数据依然要保持
+              localStorage.setItem('isLogined','1');
+              this.$router.push('/');
+            } else {
+              this.$messagebox("登录提示","用户名或密码错误");
+            }
+        })
       }
     }
   }

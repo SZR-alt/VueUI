@@ -27,7 +27,7 @@
                 <div class="author-info-detail">
                     <div class="author-info-nickname">{{info.nickname}}</div>
                     <div class="author-info-badge">
-                        共<mt-badge type="primary" size="small">{{info.article_number}}</mt-badge>篇
+                        共<mt-badge type="error" size="small">{{info.article_number}}</mt-badge>篇
                     </div>
                 </div>
                 

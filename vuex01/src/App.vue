@@ -6,6 +6,7 @@
       <router-link to="/access2">访问Vuex数据页面2</router-link> |
       <router-link to="/changeage">修改年龄</router-link> |
       <router-link to="/addproduct">添加商品</router-link> |
+      <router-link to="/ajax">AJAX</router-link> |
     </div>
     <router-view/>
   </div>

@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="swipe">
-      <mt-swipe>
+      <mt-swipe
+        :showIndicators="true"
+        :auto="5000"
+        :speed="500"
+        :continuous="true">
           <mt-swipe-item><img src="../../assets/images/0f030e329da14d5a8a4633bbf8499fc5.jpg"></mt-swipe-item>
           <mt-swipe-item><img src="../../assets/images/8b8d2793234c449cb88a6c1c5480d482.jpg"></mt-swipe-item>
           <mt-swipe-item><img src="../../assets/images/48f4cff6896745ba870395a3ebf15505.jpg"></mt-swipe-item>
