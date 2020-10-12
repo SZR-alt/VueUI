@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <video id="video" src="video/video.mp4"></video>
+  <button onclick="toggleControls()">显示/隐藏控件</button>
+  <button onclick="togglePoster()">显示/隐藏海报帧</button>
+  <script>
+    function togglePoster(){
+      //获取HTMLVideoElement元素
+      let videoEle = document.getElementById('video');
+      
+      if(videoEle.hasAttribute('poster') == false){
+        videoEle.poster = 'ad/poster.jpg';
+      } else {
+        videoEle.removeAttribute('poster');
+      }
+    }
+    function toggleControls(){
+      //获取HTMLVideoElement元素
+      let videoEle = document.getElementById('video');      
+      videoEle.controls = !videoEle.controls;
+      // if(videoEle.controls == true){
+      //   //设置controls属性
+      //   videoEle.controls = false;
+      // } else {
+      //   videoEle.controls = true;
+      // }
+    }
+  </script>
+</body>
+</html>
