@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="makePlayer()">单击我，听首歌--Stronger</button>
+  <script>
+    function makePlayer(){
+      //创建音频对象 -- HTMLAudioElement
+      let audioEle = new Audio();
+      //设置src属性
+      audioEle.src = 'audio/stronger.mp3';
+      //设置显示控件
+      audioEle.controls = true;
+      //将HTMLAudioElement对象到DOM树
+      document.body.appendChild(audioEle);
+    }
+  </script>
+</body>
+</html>

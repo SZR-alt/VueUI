@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #canvas{
+      border:1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    let canvasEle = document.getElementById('canvas');
+    //设置HTMLCanvasElement的宽度
+    canvasEle.width = 600;
+    //设置HTMLCanvasElement的高度
+    canvasEle.height =  480;
+    //获取HTMLCanvasElement的上下文
+    let ctx = canvasEle.getContext("2d");
+    //设置描边颜色
+    ctx.strokeStyle = '#0aa1ed';
+    //绘制描边矩形
+    ctx.strokeRect(100,100,150,50)
+    //设置填充颜色
+    ctx.fillStyle = 'red';
+    //绘制填充矩形
+    ctx.fillRect(100,200,150,50)
+    //绘制描边文本
+    ctx.strokeText('马上下课了',100,300);
+    //绘制填充文本
+    ctx.fillText('哈哈哈',100,400);
+  </script>
+</body>
+</html>
