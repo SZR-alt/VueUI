@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .canvas {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas class="canvas"></canvas>
+  <script>
+
+    let dataset = [
+      {
+        label: '服装鞋帽',
+        value: 220
+      },
+      {
+        label: '家居家具',
+        value: 310
+      },
+      {
+        label: '家用电器',
+        value: 182
+      },
+      {
+        label: '音像制品',
+        value: 198
+      }
+    ];
+    let canvasEle = document.querySelector('.canvas');
+    canvasEle.width = 600;
+    canvasEle.height = 480;
+    let ctx = canvasEle.getContext('2d');
+
+    //标识柱形图的宽度
+    let width = 50;
+    //计算间距
+    //let distance = (画布的宽度 - 柱子的数量 * 50) / (柱子的数量+1);
+    let distance = Math.ceil((canvasEle.width - dataset.length * width) / (dataset.length + 1));
+    //循环绘制矩形
+    for (let n = 0; n < dataset.length; n++) {
+      // ctx.fillRect(起点X轴,起点Y轴,宽度,高度)      
+      let x = (n + 1) * distance + n * width;
+      let y = canvasEle.height - dataset[n].value;
+      ctx.fillStyle = n % 2 ? '#c23531':'#2f4554';
+      ctx.fillRect(x, y, width, dataset[n].value);
+      //设置文本颜色
+      ctx.fillStyle = '#000';
+      //设置文本字体样式
+      ctx.font = '14px Microsoft Yahei';
+      //设置文本的水平对齐方式
+      ctx.textAlign = 'center';
+      //绘制文本
+      ctx.fillText(dataset[n].value,x + Math.ceil(width / 2),y-10);
+    }
+  </script>
+</body>
+
+</html>
