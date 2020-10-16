@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>百度地图</title>
+  <style>
+    .container{
+      width:500px;
+      height:420px;
+      margin: 0 auto;
+      border:1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container"></div>
+  <script src="http://api.map.baidu.com/api?v=3.0&ak=4Zm3OlEZkzWr4rQjlpDmhyutuqHvvtaM"></script>
+  <script>
+    // 创建地图实例
+    let divEle = document.querySelector('.container');
+    let map = new BMap.Map(divEle);   
+    // 设置地图实例的坐标中心及展示级别 -- 省、自治区、直辖市名称
+    // map.centerAndZoom('陕西',7); 
+    // 或者
+    // map.centerAndZoom('陕西'); 
+
+     // 创建坐标点 -- Point对象
+    let point = new BMap.Point(116.403954,39.915104);
+    map.centerAndZoom(point,15);
+  </script>
+</body>
+</html>

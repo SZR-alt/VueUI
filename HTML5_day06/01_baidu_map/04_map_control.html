@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 500px;
+      height: 420px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script src="http://api.map.baidu.com/api?v=3.0&ak=4Zm3OlEZkzWr4rQjlpDmhyutuqHvvtaM"></script>
+  <script>
+    // 获取Geolocation对象
+    let geo = navigator.geolocation;
+    // 调用getCurrentPosition()方法
+    geo.getCurrentPosition(
+      (position) => {
+        //获取到GeolocationPositionCoordinates对象
+        let coords = position.coords;
+        //获取经度
+        let longitude = coords.longitude;
+        //获取纬度
+        let latitude = coords.latitude;
+        //创建地图实例
+        let map = new BMap.Map('container');
+        //创建地图点坐标对象 -- Point对象
+        let point = new BMap.Point(longitude,latitude);
+        //初始化地图实例
+        map.centerAndZoom(point,15);
+        //禁止地图拖拽功能
+        map.disableDragging();
+        //禁用鼠标滚动缩放地图
+        map.disableScrollWheelZoom();
+        //创建Size对象,以控制缩放平移控件的距离
+        let size = new BMap.Size(20,20);
+        //创建NavigationControl(平移缩放)控件
+        let nc = new BMap.NavigationControl({
+            //设置停靠位置为左上角
+            anchor:BMAP_ANCHOR_TOP_RIGHT,
+            offset:size,
+            //设置类型为平移、缩入及滑块
+            type:BMAP_NAVIGATION_CONTROL_LARGE,
+        });
+        //添加NavigationControl(平移缩放)控件
+        map.addControl(nc);        
+      },
+      (error) => {
+          console.log(error.code);
+          console.log(code.message);
+      }
+    )
+  </script>
+</body>
+
+</html>

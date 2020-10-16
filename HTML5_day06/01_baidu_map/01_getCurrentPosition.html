@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="getLocation()">获取地理定位</button>
+  <script>
+    function getLocation() {
+      //获取Geolocation对象
+      let geo = navigator.geolocation;
+      //调用Geolocation对象getCurrentPosition()方法
+      geo.getCurrentPosition(
+        //success时的回调
+        position => {
+          //获取GeolocationCoordinates对象
+          let coords = position.coords;
+          //longitude表示经度,latitude表示纬度
+          console.log(coords.longitude + ',' + coords.latitude);
+          console.log(position);
+        }, 
+        //error时的回调
+        error => {
+          console.log(error);
+        },
+        // 配置项
+        {
+          timeout:5000
+        }
+      );
+      console.log('哈哈哈');
+    }
+  </script>
+</body>
+
+</html>
