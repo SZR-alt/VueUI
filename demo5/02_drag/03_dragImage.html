@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #source,
+    #target {
+      width: 150px;
+      height: 150px;
+      margin: 10px auto;
+    }
+
+    #source {
+      border: 2px solid #f00;
+    }
+
+    #target {
+      border: 2px solid #0f0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="source">
+    <!-- <img src="images/0e7288396e103bf0.jpg" alt=""  id="img"> -->
+    <a href="http://www.baidu.com" id="img">百度</a>
+  </div>
+  <div id="target">
+  </div>
+  <script>
+    //获取源对象
+    let imgEle = document.getElementById('img');
+    //获取目标对象
+    let divEle = document.getElementById('target');
+
+    //为源对象添加dragstart事件,在该事件中需要将拖放的链接放到DataTransfer对象中去
+    imgEle.ondragstart = function (event) {
+      //在该过程中要先获取到DataTransfer对象,因为只有得到DataTransfer对象
+      //才能把拖放的数据存储到里面去,要得到该对象，就必须调用 DragEvent接口
+      //的dataTransfer属性才行,所以示例如下：
+      //let dt = DragEvent接口.dataTransfer;
+      //没有事件接口对象，绝对调用不了dataTransfer属性,也就得不到DataTransfer对象！！
+      //所以必须为该事件处理函数添加 event参数,该参数自动代表当前的事件对象
+      let dt = event.dataTransfer;
+      //通过DataTransfer对象的setData()方法将数据添加到DataTransfer对象内      
+      dt.setData('link',event.target.innerHTML);
+      
+    }
+
+    divEle.ondragover = function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+
+    divEle.ondrop = function (event) {
+      event.stopPropagation();
+      event.preventDefault();
+      //获取DataTransfer对象
+      let dt = event.dataTransfer;
+      //获取原始保存的数据
+      let data = dt.getData('link');
+      //设置目标对象的内容为原始保存的数据
+      event.target.innerHTML = data;
+      //删除源对象
+      imgEle.remove();
+    }
+  </script>
+</body>
+
+</html>
